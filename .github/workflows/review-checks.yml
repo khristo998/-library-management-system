@@ -1,0 +1,21 @@
+name: Code Review Checks
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install tools
+        run: pip install black flake8 bandit
+      - name: Black check
+        run: black --check .
+      - name: Flake8 lint
+        run: flake8 .
+      - name: Bandit security
+        run: bandit -r . -ll
