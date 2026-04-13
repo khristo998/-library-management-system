@@ -1,1 +1,2 @@
-print('Hello from library')
+from login import login
+print(login('admin', '123'))
